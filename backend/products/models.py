@@ -23,17 +23,15 @@ class Product(models.Model):
         decimal_places=2
     )
 
-    image = models.ImageField(
-        upload_to='products/'
-    )
-
     stock = models.PositiveIntegerField(
         default=0
     )
 
-    featured = models.BooleanField(
-        default=False
+    image = models.ImageField(
+        upload_to='products/'
     )
+
+    featured = models.BooleanField(default=False)
 
     created_at = models.DateTimeField(
         auto_now_add=True
