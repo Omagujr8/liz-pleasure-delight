@@ -4,6 +4,7 @@ from products.views import ProductListAPIView, ProductDetailAPIView
 from reviews.views import ReviewListCreateAPIView
 from orders.views import OrderListCreateAPIView
 from accounts.views import RegisterAPIView
+from orders.views import AddToCartAPIView
 from rest_framework_simplejwt.views import (
     TokenObtainPairView,
     TokenRefreshView,
@@ -15,6 +16,7 @@ urlpatterns = [
     path('api/products/<int:pk>/', ProductDetailAPIView.as_view()),
     path('api/reviews/', ReviewListCreateAPIView.as_view()),
     path('api/orders/', OrderListCreateAPIView.as_view()),
+    path('api/cart/add/', AddToCartAPIView.as_view()),
 ]
 
 urlpatterns += [
