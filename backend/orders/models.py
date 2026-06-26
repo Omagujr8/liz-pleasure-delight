@@ -1,6 +1,7 @@
+from django.conf import settings
 from django.db import models
-from django.contrib.auth.models import User
 from products.models import Product
+from django.contrib.auth.models import User
 
 class Order(models.Model):
 
@@ -13,8 +14,10 @@ class Order(models.Model):
     )
 
     user = models.ForeignKey(
-        User,
-        on_delete=models.CASCADE
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE,
+        null=True,
+        blank=True
     )
 
     customer_name = models.CharField(
