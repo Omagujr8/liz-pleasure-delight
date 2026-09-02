@@ -1,16 +1,74 @@
 :root {
+  /* ========================================
+     LIZ PLEASURE DELIGHT BRAND COLOURS
+     ======================================== */
+
+  --brand-deep-red: #8E1117;
+  --brand-red: #C51F2A;
+  --brand-orange: #E87516;
+  --brand-gold: #F4B51B;
+  --brand-cream: #FFF8E8;
+  --brand-brown: #3A2116;
+  --brand-white: #FFFFFF;
+
+  /* ========================================
+     SEMANTIC COLOURS
+     ======================================== */
+
+  --color-primary: var(--brand-red);
+  --color-primary-dark: var(--brand-deep-red);
+  --color-secondary: var(--brand-orange);
+  --color-accent: var(--brand-gold);
+
+  --color-background: var(--brand-cream);
+  --color-surface: var(--brand-white);
+  --color-text: var(--brand-brown);
+  --color-text-light: var(--brand-white);
+
+  --color-border: rgba(58, 33, 22, 0.15);
+
+  /* ========================================
+     SHADOWS
+     ======================================== */
+
+  --shadow-sm: 0 2px 8px rgba(58, 33, 22, 0.08);
+  --shadow-md: 0 6px 20px rgba(58, 33, 22, 0.12);
+
+  /* ========================================
+     BORDER RADIUS
+     ======================================== */
+
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 18px;
+
+  /* ========================================
+     GLOBAL FONT
+     ======================================== */
+
   font-family: Arial, Helvetica, sans-serif;
-  color: #242424;
-  background: #fff8e8;
+  color: var(--brand-brown);
+  background: var(--brand-cream);
 }
+
+
+/* ========================================
+   GLOBAL RESET
+   ======================================== */
 
 * {
   box-sizing: border-box;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   margin: 0;
-  background: #fff8e8;
+  min-width: 320px;
+  background: var(--brand-cream);
+  color: var(--brand-brown);
 }
 
 a {
@@ -18,26 +76,49 @@ a {
   color: inherit;
 }
 
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+
+/* ========================================
+   NAVBAR
+   ======================================== */
+
 .navbar {
   align-items: center;
-  background: #fffdf8;
-  border-bottom: 1px solid #f1dfb6;
+  background: var(--brand-deep-red);
+  border-bottom: 1px solid var(--brand-deep-red);
+  color: var(--brand-white);
   display: flex;
   justify-content: space-between;
   padding: 18px 7%;
   position: sticky;
   top: 0;
   z-index: 10;
+  box-shadow: var(--shadow-sm);
 }
 
 .brand {
-  color: #d62828;
+  color: var(--brand-white);
   font-size: 1.25rem;
   font-weight: 800;
 }
 
 .brand span {
-  color: #8b5e3c;
+  color: var(--brand-gold);
 }
 
 .nav-links {
@@ -47,20 +128,39 @@ a {
 }
 
 .nav-links a {
+  color: var(--brand-white);
+  transition: color 0.2s ease;
   font-size: 0.95rem;
   font-weight: 600;
+  transition: color 0.2s ease;
+}
+
+.nav-links a:hover {
+  color: var(--brand-gold);
 }
 
 .nav-links a.active {
-  color: #d62828;
+  color: var(--brand-gold);
 }
 
 .order-link {
-  background: #d62828;
+  background: var(--brand-red);
   border-radius: 999px;
-  color: white !important;
+  color: var(--brand-white) !important;
   padding: 10px 16px;
+  transition: all 0.2s ease;
 }
+
+.order-link:hover {
+  background: var(--brand-orange);
+  color: var(--brand-white) !important;
+  transform: translateY(-2px);
+}
+
+
+/* ========================================
+   HERO SECTION
+   ======================================== */
 
 .hero {
   align-items: center;
@@ -72,7 +172,7 @@ a {
 }
 
 .eyebrow {
-  color: #d62828;
+  color: var(--brand-red);
   font-size: 0.85rem;
   font-weight: 800;
   letter-spacing: 1px;
@@ -81,7 +181,7 @@ a {
 
 .hero h1,
 .page-section h1 {
-  color: #8b5e3c;
+  color: var(--brand-deep-red);
   font-size: clamp(2.5rem, 5vw, 4.7rem);
   line-height: 1;
   margin: 12px 0;
@@ -93,6 +193,11 @@ a {
   max-width: 580px;
 }
 
+
+/* ========================================
+   HERO BUTTONS
+   ======================================== */
+
 .hero-buttons {
   display: flex;
   flex-wrap: wrap;
@@ -101,19 +206,34 @@ a {
 }
 
 .button {
-  background: #d62828;
-  border: 2px solid #d62828;
+  background: var(--brand-red);
+  border: 2px solid var(--brand-red);
   border-radius: 999px;
-  color: white;
+  color: var(--brand-white);
   cursor: pointer;
   display: inline-block;
   font-weight: 700;
   padding: 13px 22px;
+  transition: all 0.2s ease;
+}
+
+.button:hover {
+  background: var(--brand-deep-red);
+  border-color: var(--brand-deep-red);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-sm);
 }
 
 .button-outline {
   background: transparent;
-  color: #d62828;
+  border-color: var(--brand-red);
+  color: var(--brand-red);
+}
+
+.button-outline:hover {
+  background: var(--brand-red);
+  border-color: var(--brand-red);
+  color: var(--brand-white);
 }
 
 .small-button {
@@ -121,18 +241,28 @@ a {
   padding: 10px 15px;
 }
 
+
+/* ========================================
+   HERO SNACK CARD
+   ======================================== */
+
 .hero-snack-card {
-  background: #f4c542;
+  background: var(--brand-gold);
   border-radius: 28px;
-  box-shadow: 12px 12px 0 #8b5e3c;
+  box-shadow: 12px 12px 0 var(--brand-deep-red);
   padding: 45px 30px;
 }
 
 .hero-snack-card h2 {
-  color: #8b5e3c;
+  color: var(--brand-brown);
   font-size: 2.2rem;
   margin-bottom: 0;
 }
+
+
+/* ========================================
+   SECTIONS
+   ======================================== */
 
 .section,
 .page-section {
@@ -142,7 +272,7 @@ a {
 }
 
 .section h2 {
-  color: #8b5e3c;
+  color: var(--brand-deep-red);
   font-size: 2rem;
 }
 
@@ -151,6 +281,11 @@ a {
   line-height: 1.7;
   max-width: 700px;
 }
+
+
+/* ========================================
+   FEATURE & PRODUCT GRID
+   ======================================== */
 
 .feature-grid,
 .product-grid {
@@ -164,16 +299,33 @@ a {
 .product-card,
 .about-box,
 .order-form {
-  background: #fffdf8;
-  border: 1px solid #f1dfb6;
-  border-radius: 18px;
+  background: var(--brand-white);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
   padding: 24px;
+  box-shadow: var(--shadow-sm);
+}
+
+.feature-grid article,
+.product-card {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.feature-grid article:hover,
+.product-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-md);
 }
 
 .feature-grid h3,
 .product-card h3 {
-  color: #8b5e3c;
+  color: var(--brand-deep-red);
 }
+
+
+/* ========================================
+   PRODUCT CARD
+   ======================================== */
 
 .product-card {
   overflow: hidden;
@@ -182,7 +334,7 @@ a {
 
 .product-image-box {
   align-items: center;
-  background: #f4c542;
+  background: var(--brand-orange);
   display: flex;
   height: 210px;
   justify-content: center;
@@ -199,11 +351,27 @@ a {
 }
 
 .product-category {
-  color: #d62828;
+  color: var(--brand-red);
   font-size: 0.8rem;
   font-weight: 800;
   text-transform: uppercase;
 }
+
+.product-price {
+  color: var(--brand-red);
+  font-size: 1.2rem;
+  font-weight: 800;
+}
+
+.product-rating {
+  color: var(--brand-gold);
+  font-weight: 700;
+}
+
+
+/* ========================================
+   ORDER FORM
+   ======================================== */
 
 .order-form {
   display: grid;
@@ -219,19 +387,88 @@ a {
 }
 
 input,
-textarea {
-  border: 1px solid #d9c79d;
-  border-radius: 10px;
+textarea,
+select {
+  background: var(--brand-white);
+  border: 1px solid #D9C79D;
+  border-radius: var(--radius-md);
+  color: var(--brand-brown);
   font: inherit;
   padding: 12px;
 }
 
+input:focus,
+textarea:focus,
+select:focus {
+  border-color: var(--brand-red);
+  outline: 2px solid rgba(197, 31, 42, 0.15);
+}
+
+
+/* ========================================
+   FOOTER
+   ======================================== */
+
 .footer {
-  background: #8b5e3c;
-  color: #fff8e8;
+  background: var(--brand-deep-red);
+  color: var(--brand-cream);
   padding: 35px 7%;
   text-align: center;
 }
+
+.footer a:hover {
+  color: var(--brand-gold);
+}
+
+
+/* ========================================
+   BRAND UTILITY CLASSES
+   ======================================== */
+
+.bg-brand-red {
+  background-color: var(--brand-red);
+}
+
+.bg-deep-red {
+  background-color: var(--brand-deep-red);
+}
+
+.bg-orange {
+  background-color: var(--brand-orange);
+}
+
+.bg-gold {
+  background-color: var(--brand-gold);
+}
+
+.bg-cream {
+  background-color: var(--brand-cream);
+}
+
+.text-brand-red {
+  color: var(--brand-red);
+}
+
+.text-deep-red {
+  color: var(--brand-deep-red);
+}
+
+.text-orange {
+  color: var(--brand-orange);
+}
+
+.text-gold {
+  color: var(--brand-gold);
+}
+
+.text-brown {
+  color: var(--brand-brown);
+}
+
+
+/* ========================================
+   MOBILE RESPONSIVENESS
+   ======================================== */
 
 @media (max-width: 800px) {
   .navbar,

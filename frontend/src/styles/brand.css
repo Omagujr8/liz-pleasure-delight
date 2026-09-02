@@ -1,0 +1,38 @@
+:root {
+  /* ========================================
+     Liz Pleasure Delight Brand Colours
+     ======================================== */
+
+  --brand-deep-red: #8E1117;
+  --brand-red: #C51F2A;
+  --brand-orange: #E87516;
+  --brand-gold: #F4B51B;
+  --brand-cream: #FFF8E8;
+  --brand-brown: #3A2116;
+  --brand-white: #FFFFFF;
+
+  
+
+  --color-primary: var(--brand-red);
+  --color-primary-dark: var(--brand-deep-red);
+  --color-secondary: var(--brand-orange);
+  --color-accent: var(--brand-gold);
+
+  --color-background: var(--brand-cream);
+  --color-surface: var(--brand-white);
+  --color-text: var(--brand-brown);
+  --color-text-light: var(--brand-white);
+
+  /* ========================================
+     UI
+     ======================================== */
+
+  --color-border: rgba(58, 33, 22, 0.15);
+
+  --shadow-sm: 0 2px 8px rgba(58, 33, 22, 0.08);
+  --shadow-md: 0 6px 20px rgba(58, 33, 22, 0.12);
+
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+}
