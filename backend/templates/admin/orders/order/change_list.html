@@ -1,0 +1,80 @@
+{% extends "admin/change_list.html" %}
+{% load i18n %}
+
+{% block extrastyle %}
+  {{ block.super }}
+  <style>
+    :root {
+      --order-bg: #0b0b0b;
+      --order-card: #222222;
+      --order-border: #363636;
+      --order-text: #f4f4f4;
+      --order-muted: #b9b9b9;
+      --order-accent: #f5a623;
+    }
+    #changelist .results { display: none; }
+    .order-dashboard { display: grid; gap: 18px; margin: 10px 0 24px; padding: 18px; border-radius: 18px; background: var(--order-bg); }
+    .order-card { position: relative; padding: 22px 24px; border: 1px solid var(--order-border); border-radius: 28px; color: var(--order-text); background: var(--order-card); box-shadow: 0 10px 24px rgba(0, 0, 0, .18); }
+    .order-card h2 { margin: 0 0 28px; color: var(--order-text); font-size: 1.05rem; }
+    .order-summary { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 16px; margin-bottom: 22px; }
+    .order-summary span, .order-items-title { display: block; margin-bottom: 7px; color: var(--order-muted); font-size: .78rem; text-transform: uppercase; letter-spacing: .06em; }
+    .order-summary strong { display: block; font-size: .98rem; word-break: break-word; }
+    .order-items { padding-top: 18px; border-top: 1px solid var(--order-border); }
+    .order-item { display: flex; gap: 10px; margin-top: 8px; color: var(--order-text); }
+    .order-item::before { content: '-'; color: var(--order-accent); }
+    .order-actions { position: absolute; top: 18px; right: 20px; display: flex; gap: 8px; }
+    .order-action { display: inline-grid; width: 32px; height: 32px; place-items: center; border: 1px solid #4d4d4d; border-radius: 50%; color: var(--order-text); background: transparent; cursor: pointer; text-decoration: none; }
+    .order-action:hover { border-color: var(--order-accent); color: var(--order-accent); }
+    .order-status { color: var(--order-accent); }
+    .order-empty { padding: 36px; color: var(--order-muted); text-align: center; }
+    @media (max-width: 900px) {
+      .order-summary { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .order-card { padding: 20px; }
+    }
+    @media (max-width: 520px) {
+      .order-dashboard { padding: 10px; }
+      .order-summary { grid-template-columns: 1fr; }
+    }
+  </style>
+{% endblock %}
+
+{% block result_list %}
+  <section class="order-dashboard" aria-label="Orders">
+    {% for order in cl.result_list %}
+      <article class="order-card" data-order="{{ order.pk }}">
+        <div class="order-actions">
+          <button class="order-action copy-order" type="button" title="Copy order details" aria-label="Copy order details">&#10697;</button>
+          <a class="order-action" href="{% url 'admin:orders_order_change' order.pk %}" title="Open order" aria-label="Open order">&#8595;</a>
+        </div>
+        <h2>Order #{{ order.pk }}</h2>
+        <div class="order-summary">
+          <div><span>Customer</span><strong>{{ order.customer_name }}</strong></div>
+          <div><span>Phone</span><strong>{{ order.phone_number }}</strong></div>
+          <div><span>Total</span><strong>&#8358;{{ order.total_price|floatformat:2 }}</strong></div>
+          <div><span>Payment</span><strong>{% if order.payment.paid %}Paid{% else %}Pending{% endif %}</strong></div>
+          <div><span>Status</span><strong class="order-status">{{ order.get_status_display }}</strong></div>
+        </div>
+        <div class="order-items">
+          <span class="order-items-title">Items{% if order.scheduled_date %} · {{ order.scheduled_date|date:'M j, Y' }}{% endif %}</span>
+          {% for item in order.items.all %}
+            <div class="order-item"><span>{{ item.quantity }} x {{ item.product.name }}</span></div>
+          {% empty %}
+            <div class="order-item">No items recorded</div>
+          {% endfor %}
+        </div>
+      </article>
+    {% empty %}
+      <div class="order-empty">No orders found.</div>
+    {% endfor %}
+  </section>
+  <script>
+    document.querySelectorAll('.copy-order').forEach((button) => {
+      button.addEventListener('click', async () => {
+        const card = button.closest('.order-card');
+        await navigator.clipboard.writeText(card.innerText.replace(/\s+/g, ' ').trim());
+        button.textContent = '✓';
+        window.setTimeout(() => { button.innerHTML = '&#10697;'; }, 1200);
+      });
+    });
+  </script>
+{% endblock %}
