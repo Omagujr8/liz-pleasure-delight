@@ -1,22 +1,27 @@
-import { Link, NavLink } from "react-router-dom";
-
 function Navbar() {
   return (
     <header className="navbar">
-      <Link to="/" className="brand">
-        Liz <span>Pleasure Delight</span>
-      </Link>
+      <div className="nav-container">
 
-      <nav className="nav-links">
-        <NavLink to="/">Home</NavLink>
-        <NavLink to="/snacks-mix">Snacks</NavLink>
-        <NavLink to="/menu">Menu</NavLink>
-        <NavLink to="/about">About</NavLink>
-        <NavLink to="/reviews">Reviews</NavLink>
-        <NavLink to="/order" className="order-link">
-          Order Now
-        </NavLink>
-      </nav>
+        <a href="#" className="brand">
+          <img
+            src="/images/logo.jpeg"
+            alt="Liz Pleasure Delight"
+          />
+        </a>
+
+        <nav>
+          <a href="#">Home</a>
+          <a href="#snacks">Snacks</a>
+          <a href="#menu">Menu</a>
+          <a href="#about">About</a>
+          <a href="#reviews">Reviews</a>
+          <a href="#order" className="nav-order">
+            Order Now
+          </a>
+        </nav>
+
+      </div>
     </header>
   );
 }

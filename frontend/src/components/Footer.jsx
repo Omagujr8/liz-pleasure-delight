@@ -1,9 +1,39 @@
 function Footer() {
   return (
     <footer className="footer">
-      <h3>Liz Pleasure Delight</h3>
-      <p>Fresh popcorn, premium peanuts, and delicious snack mixes.</p>
-      <p>© {new Date().getFullYear()} Liz Pleasure Delight. All rights reserved.</p>
+
+      <div className="footer-brand">
+
+        <img
+          src="/images/logo.jpeg"
+          alt="Liz Pleasure Delight"
+        />
+
+        <p>
+          Absolute the best.
+        </p>
+
+      </div>
+
+      <div className="footer-links">
+
+        <a href="#">Home</a>
+        <a href="#snacks">Snacks</a>
+        <a href="#menu">Menu</a>
+        <a href="#about">About</a>
+        <a href="#reviews">Reviews</a>
+
+      </div>
+
+      <div className="footer-contact">
+
+        <strong>Let's talk snacks.</strong>
+
+        <p>📞 08163426030</p>
+        <p>📍 Life Camp, Abuja</p>
+
+      </div>
+
     </footer>
   );
 }
