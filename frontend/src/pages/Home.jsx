@@ -23,7 +23,7 @@ function Home() {
         </div>
 
         <div className="hero-snack-card">
-          <p>Popcorn • Peanuts • Chips</p>
+          <p>Popcorn • Peanuts • Chin Chin</p>
           <h2>Made for every craving.</h2>
         </div>
       </section>

@@ -9,7 +9,7 @@ import {
 } from "lucide-react";
 
 import bottles from "./assets/bottles.jpeg";
-import chips from "./assets/chips.jpeg";
+import chinChin from "./assets/chips.jpeg";
 import logo from "./assets/logo.jpeg";
 import peanuts from "./assets/peanuts.jpeg";
 import popcorn from "./assets/popcorn.jpeg";
@@ -26,7 +26,7 @@ const slides = [
     tag: "Popped fresh, packed warm",
     image: popcorn,
   },
-  { name: "Chin Chin", tag: "Golden, crunchy, and bite-sized", image: chips },
+  { name: "Chin Chin", tag: "Golden, crunchy, and bite-sized", image: chinChin },
 ];
 
 const lineup = [
@@ -44,9 +44,8 @@ const lineup = [
   },
   {
     name: "Chin Chin",
-    catalogName: "Chips",
     description: "Golden, crunchy, and bite-sized, made for every craving.",
-    image: chips,
+    image: chinChin,
   },
   {
     name: "Peanut Bottles",
@@ -130,8 +129,8 @@ function App() {
     const orderItems = selected.map((item) => {
       const product = products.find(
         (candidate) =>
-          candidate.name.toLowerCase().includes((item.catalogName || item.name).toLowerCase()) ||
-          (item.catalogName || item.name).toLowerCase().includes(candidate.name.toLowerCase()),
+          candidate.name.toLowerCase().includes(item.name.toLowerCase()) ||
+          item.name.toLowerCase().includes(candidate.name.toLowerCase()),
       );
       return {
         product_id: product?.id,
@@ -233,8 +232,8 @@ function App() {
             <h1>Little bites. Big delight.</h1>
             <p className="hero-description">
               Discover irresistible peanuts, freshly popped popcorn, and crunchy
-              chin chin made to turn everyday moments into something special. One
-              taste, and you&apos;ll understand the pleasure.
+              chin chin made to turn everyday moments into something special.
+              One taste, and you&apos;ll understand the pleasure.
             </p>
             <div className="hero-actions">
               <a
