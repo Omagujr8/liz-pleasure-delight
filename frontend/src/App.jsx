@@ -59,6 +59,7 @@ function App() {
   const [slideIndex, setSlideIndex] = useState(0);
   const [menuOpen, setMenuOpen] = useState(false);
   const [products, setProducts] = useState([]);
+  const [productsLoading, setProductsLoading] = useState(true);
   const [orderError, setOrderError] = useState("");
   const [orderSubmitted, setOrderSubmitted] = useState(false);
   const [selectedSnacks, setSelectedSnacks] = useState({});
@@ -85,7 +86,8 @@ function App() {
         setOrderError(
           "The product service is unavailable. You can still contact us on WhatsApp.",
         ),
-      );
+      )
+      .finally(() => setProductsLoading(false));
   }, []);
 
   const showSlide = (index) =>
@@ -387,7 +389,11 @@ function App() {
             <div className="available-snacks-heading">
               <h3>Available snacks</h3>
             </div>
-            {products.length ? (
+            {productsLoading ? (
+              <p className="available-snacks-empty">
+                Loading available snacks...
+              </p>
+            ) : products.length ? (
               <div className="available-snacks-grid">
                 {products.map((product) => (
                   <div className="available-snack" key={product.id}>
@@ -402,7 +408,7 @@ function App() {
               </div>
             ) : (
               <p className="available-snacks-empty">
-                Loading available snacks...
+                No snacks are available right now.
               </p>
             )}
           </div>
