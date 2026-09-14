@@ -26,7 +26,7 @@ const slides = [
     tag: "Popped fresh, packed warm",
     image: popcorn,
   },
-  { name: "Crispy Chips", tag: "Thin-cut and crispy", image: chips },
+  { name: "Chin Chin", tag: "Golden, crunchy, and bite-sized", image: chips },
 ];
 
 const lineup = [
@@ -43,8 +43,9 @@ const lineup = [
     offset: true,
   },
   {
-    name: "Chips",
-    description: "Thin-cut and crispy, made for every kind of craving.",
+    name: "Chin Chin",
+    catalogName: "Chips",
+    description: "Golden, crunchy, and bite-sized, made for every craving.",
     image: chips,
   },
   {
@@ -78,9 +79,14 @@ function App() {
   }, []);
 
   useEffect(() => {
-    api.get("/products/")
+    api
+      .get("/products/")
       .then(({ data }) => setProducts(data))
-      .catch(() => setOrderError("The product service is unavailable. You can still contact us on WhatsApp."));
+      .catch(() =>
+        setOrderError(
+          "The product service is unavailable. You can still contact us on WhatsApp.",
+        ),
+      );
   }, []);
 
   const showSlide = (index) =>
@@ -122,11 +128,21 @@ function App() {
     }
 
     const orderItems = selected.map((item) => {
-      const product = products.find((candidate) => candidate.name.toLowerCase().includes(item.name.toLowerCase()) || item.name.toLowerCase().includes(candidate.name.toLowerCase()));
-      return { product_id: product?.id, quantity: selectedSnacks[item.name], name: item.name };
+      const product = products.find(
+        (candidate) =>
+          candidate.name.toLowerCase().includes((item.catalogName || item.name).toLowerCase()) ||
+          (item.catalogName || item.name).toLowerCase().includes(candidate.name.toLowerCase()),
+      );
+      return {
+        product_id: product?.id,
+        quantity: selectedSnacks[item.name],
+        name: item.name,
+      };
     });
     if (orderItems.some((item) => !item.product_id)) {
-      setOrderError("One or more selected snacks is not available in the product catalog yet.");
+      setOrderError(
+        "One or more selected snacks is not available in the product catalog yet.",
+      );
       return;
     }
 
@@ -145,18 +161,30 @@ function App() {
     ].join("%0A");
     const whatsappUrl = `https://wa.me/2348163426030?text=${message}`;
 
-    api.post("/orders/", {
-      customer_name: orderDetails.name,
-      phone_number: orderDetails.phone,
-      address: orderDetails.address,
-      scheduled_date: orderDetails.scheduledFor,
-      items: orderItems.map(({ product_id, quantity }) => ({ product_id, quantity })),
-    }).then(() => {
-      setOrderSubmitted(true);
-      window.open(whatsappUrl, "_blank", "noopener,noreferrer,width=900,height=700");
-    }).catch(() => {
-      setOrderError("We could not save your order. Please try again or use WhatsApp directly.");
-    });
+    api
+      .post("/orders/", {
+        customer_name: orderDetails.name,
+        phone_number: orderDetails.phone,
+        address: orderDetails.address,
+        scheduled_date: orderDetails.scheduledFor,
+        items: orderItems.map(({ product_id, quantity }) => ({
+          product_id,
+          quantity,
+        })),
+      })
+      .then(() => {
+        setOrderSubmitted(true);
+        window.open(
+          whatsappUrl,
+          "_blank",
+          "noopener,noreferrer,width=900,height=700",
+        );
+      })
+      .catch(() => {
+        setOrderError(
+          "We could not save your order. Please try again or use WhatsApp directly.",
+        );
+      });
   };
 
   return (
@@ -204,8 +232,8 @@ function App() {
             <p className="eyebrow">THE CRUNCH YOU&apos;VE BEEN WAITING FOR</p>
             <h1>Little bites. Big delight.</h1>
             <p className="hero-description">
-              Discover irresistible peanuts, freshly popped popcorn, and crispy
-              chips made to turn everyday moments into something special. One
+              Discover irresistible peanuts, freshly popped popcorn, and crunchy
+              chin chin made to turn everyday moments into something special. One
               taste, and you&apos;ll understand the pleasure.
             </p>
             <div className="hero-actions">
@@ -290,8 +318,9 @@ function App() {
                 <li>
                   <span />
                   <span className="story-point">
-                    <strong>Roasted in small batches so nothing sits
-                    stale on a shelf</strong>
+                    <strong>
+                      Roasted in small batches so nothing sits stale on a shelf
+                    </strong>
                   </span>
                 </li>
                 <li>
@@ -303,8 +332,9 @@ function App() {
                 <li>
                   <span />
                   <span className="story-point">
-                    <strong>Priced for sharing because one bag never
-                    lasts alone</strong>
+                    <strong>
+                      Priced for sharing because one bag never lasts alone
+                    </strong>
                   </span>
                 </li>
               </ul>
@@ -372,7 +402,9 @@ function App() {
                 ))}
               </div>
             ) : (
-              <p className="available-snacks-empty">Loading available snacks...</p>
+              <p className="available-snacks-empty">
+                Loading available snacks...
+              </p>
             )}
           </div>
           <div className="order-layout">
@@ -449,8 +481,14 @@ function App() {
                   required
                 />
               </label>
-              {orderError && <p className="order-message order-error">{orderError}</p>}
-              {orderSubmitted && <p className="order-message order-success">Order saved. WhatsApp is opening to confirm it.</p>}
+              {orderError && (
+                <p className="order-message order-error">{orderError}</p>
+              )}
+              {orderSubmitted && (
+                <p className="order-message order-success">
+                  Order saved. WhatsApp is opening to confirm it.
+                </p>
+              )}
               <button className="button button-primary" type="submit">
                 Continue on WhatsApp
               </button>
@@ -467,7 +505,7 @@ function App() {
               <span>Liz Pleasure Delight</span>
             </div>
             <p>
-              Peanuts, popcorn, and chips made fresh in Life Camp, Abuja.
+              Peanuts, popcorn, and chin chin made fresh in Life Camp, Abuja.
               Absolute the best, say it, we will prove it.
             </p>
           </div>
